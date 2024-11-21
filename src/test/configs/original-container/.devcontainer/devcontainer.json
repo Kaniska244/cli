@@ -2,7 +2,7 @@
 	"dockerFile": "Dockerfile",
 	"workspaceFolder": "/",
 	"containerEnv": {
-		"Test_Message": "Hello Mathi",
+		"Test_Message": "u?/s\ner:p!a,s//sw\\'ord' ; `K`#a*ni&sk'a{ S}^e%n(g)u_pta@-",
 		"ROSCONSOLE_FORMAT": "[$${severity}] [$${walltime:%Y-%m-%d %H:%M:%S}] [$${node}]: $${message}"
 	}
 }
