@@ -1,7 +1,9 @@
 {
-	"dockerComposeFile": [
-		"docker-compose.yml"
-	],
-	"workspaceFolder": "/",
-	"service": "devcontainerissues"
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "devcontainerissues",
+	"workspaceFolder": "/workspaces/cli",
+	"containerEnv": {
+		"Test_Message": "H\n\ne'''llo M:;a/t?h&^iKa%#@!``ni,sk_a-",
+		"ROSCONSOLE_FORMAT": "[$${severity}] [$${walltime:%Y-%m-%d %H:%M:%S}] [$${node}]: $${message}"
+	}
 }
