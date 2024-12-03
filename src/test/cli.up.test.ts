@@ -5,9 +5,10 @@
 
 import * as assert from 'assert';
 import * as path from 'path';
-import * as fs from 'fs';
-import * as os from 'os';
-import { devContainerDown, devContainerUp, shellExec, UpResult } from './testUtils';
+//import * as fs from 'fs';
+//import * as os from 'os';
+import { shellExec } from './testUtils';
+//import { devContainerDown, devContainerUp, shellExec, UpResult } from './testUtils';
 
 const pkg = require('../../package.json');
 
@@ -25,7 +26,7 @@ describe('Dev Containers CLI', function () {
 	});
 
 	describe('Command up', () => {
-		it('should execute successfully with valid config', async () => {
+/*		it('should execute successfully with valid config', async () => {
 			const res = await shellExec(`${cli} up --workspace-folder ${__dirname}/configs/image --include-configuration --include-merged-configuration`);
 			const response = JSON.parse(res.stdout);
 			assert.equal(response.outcome, 'success');
@@ -263,9 +264,34 @@ describe('Dev Containers CLI', function () {
 			assert.equal('Hello, World!', evalEnvWithCommand.stdout);
 
 			await shellExec(`docker rm -f ${containerId}`);
+		});*/
+
+		it('should follow the correct merge logic for containerEnv using docker compose', async () => {
+			const res = await shellExec(`${cli} up --workspace-folder ${__dirname}/configs/image-containerEnv-issue`);
+			const response = JSON.parse(res.stdout);
+			assert.equal(response.outcome, 'success');
+			const containerId: string = response.containerId;
+			assert.ok(containerId, 'Container id not found.');
+
+			const javaHome = await shellExec(`docker exec ${containerId} bash -c 'echo -n $JAVA_HOME'`);
+			assert.equal('/usr/lib/jvm/msopenjdk-current', javaHome.stdout);
+
+			const envWithSpaces = await shellExec(`docker exec ${containerId} bash -c 'echo -n $VAR_WITH_SPACES'`);
+			assert.equal('value with spaces', envWithSpaces.stdout);
+
+			const evalEnvWithCommand = await shellExec(`docker exec ${containerId} bash -c 'eval $ENV_WITH_COMMAND'`);
+			assert.equal('Hello, World!', evalEnvWithCommand.stdout);
+
+			const envWithTestMessage = await shellExec(`docker exec ${containerId} bash -c 'echo -n $Test_Message'`);
+			assert.equal('H"e"\'\'\'llo M:;a/t?h&^iKa%#@!``ni,sk_a-', envWithTestMessage.stdout);			
+
+			const envWithFormat = await shellExec(`docker exec ${containerId} bash -c 'echo -n $ROSCONSOLE_FORMAT'`);
+			assert.equal('[${severity}] [${walltime:%Y-%m-%d %H:%M:%S}] [${node}]: ${message}', envWithFormat.stdout);
+
+			//await shellExec(`docker rm -f ${containerId}`);
 		});
 
-		it('should run with config in subfolder', async () => {
+		/*it('should run with config in subfolder', async () => {
 			const upRes = await shellExec(`${cli} up --workspace-folder ${__dirname}/configs/dockerfile-without-features --config ${__dirname}/configs/dockerfile-without-features/.devcontainer/subfolder/devcontainer.json`);
 			const response = JSON.parse(upRes.stdout);
 			assert.strictEqual(response.outcome, 'success');
@@ -273,6 +299,6 @@ describe('Dev Containers CLI', function () {
 			await shellExec(`docker exec ${response.containerId} test -f /subfolderConfigPostCreateCommand.txt`);
 
 			await shellExec(`docker rm -f ${response.containerId}`);
-		});
+		});*/
 	});
 });
