@@ -1,21 +1,15 @@
 {
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "devcontainerissues",
-	"workspaceFolder": "/workspaces/cli",
-    "features": {
-        "ghcr.io/devcontainers/features/java:1": {
-            "version": "none"
-        }
-    },	
+	"workspaceFolder": "/workspaces/cli",	
 	"containerEnv": {
 		"Test_Message": "H\"\n\ne\"'''llo M:;a/t?h&^iKa%#@!``ni,sk_a-",
 		"ROSCONSOLE_FORMAT": "[$${severity}] [$${walltime:%Y-%m-%d %H:%M:%S}] [$${node}]: $${message}",
-                "JAVA_HOME": "/usr/lib/jvm/msopenjdk-current",
-                "VAR_WITH_SPACES": "value with spaces",
-                "VAR_WITH_LOTS_OF_SPACES": "    value with lots of spaces.   ",
-                "VAR_WITH_QUOTES_WE_WANT_TO_KEEP": "value with \"quotes\" we want to keep",
-                "VAR_WITH_DOLLAR_SIGN": "value with $dollar sign",
-                "VAR_WITH_BACK_SLASH": "value with \\back slash",
-                "ENV_WITH_COMMAND": "bash -c 'echo -n \"Hello, World!\"'"		
+        "VAR_WITH_SPACES": "value with spaces",
+        "VAR_WITH_LOTS_OF_SPACES": "    value with lots of spaces.   ",
+        "VAR_WITH_QUOTES_WE_WANT_TO_KEEP": "value with \"quotes\" we want to keep",
+        "VAR_WITH_DOLLAR_SIGN": "value with $dollar sign",
+        "VAR_WITH_BACK_SLASH": "value with \\back slash",
+        "ENV_WITH_COMMAND": "bash -c 'echo -n \"Hello, World!\"'"		
 	}
 }
