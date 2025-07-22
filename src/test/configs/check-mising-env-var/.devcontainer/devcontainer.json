@@ -1,0 +1,12 @@
+{
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"features": {
+		"ghcr.io/devcontainers/features/node:1": {
+			"version": "20.12.2"
+		},
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
+	}
+}
+
