@@ -20,7 +20,10 @@
 	"remoteUser": "node",
 	
 	"features": {
-		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {
+		    "version": "29.0.0",
+            "moby": false
+		}
 	},
 	
 	"customizations": {
